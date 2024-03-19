@@ -6,7 +6,7 @@ pygame.display.set_caption("LC Guards")
 
 pygame.display.set_icon(pygame.image.load('../Photos/Github-icon.jpg'))
 
-window = pygame.display.set_mode((1800, 1000)) # an option pygame.NOFRAME
+window = pygame.display.set_mode((1800, 1000))  # an option pygame.NOFRAME
 background = pygame.Surface((1600, 800))
 
 # images
