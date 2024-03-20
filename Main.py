@@ -1,4 +1,5 @@
 import pygame
+# import pygame_gui
 # from main.Buttons_bar.Close_button import Close_button
 
 pygame.init()
@@ -10,11 +11,16 @@ pygame.init()
 
 "Screens"
 window = pygame.display.set_mode((1600, 1000), pygame.NOFRAME)
-main_background = pygame.Surface((1600, 950))
-bar_background = pygame.Surface((1600, 50))
+main_background = pygame.Surface((1600, 960))
+bar_background = pygame.Surface((1600, 40))
+
+"GUI"
+# gui_manager = pygame_gui.UIManager((1600, 960))
 
 "images"
 image = pygame.image.load('F:/Mohammad/Anime-images/desktop-wallpaper-cute-scary-anime-horror-anime-pfp.jpg')
+
+"fonts"
 font = pygame.font.SysFont('Arial', 20)
 
 "Loop"
@@ -26,7 +32,7 @@ while run_Key:
     bar_background.fill((200, 200, 200))
 
     "background"
-    window.blit(main_background, (0, 50))
+    window.blit(main_background, (0, 40))
     window.blit(bar_background, (0, 0))
 
     "Events"
@@ -34,7 +40,7 @@ while run_Key:
         if event.type == pygame.QUIT:
             run_Key = False
 
-    pygame.draw.circle(main_background, (0, 0, 255), (800, 475), 75)
+    pygame.draw.circle(main_background, (0, 0, 255), (800, 480), 75)
 
     "Close button"
     # Close_button(window, font, 'close').process()
