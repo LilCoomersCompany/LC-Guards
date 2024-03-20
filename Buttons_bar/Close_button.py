@@ -46,6 +46,7 @@ class Close_button:
             self.buttonSurface.fill(self.fillColors['hover'])
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColors['pressed'])
+                pygame.quit()
 
             self.buttonSurface.blit(self.buttonSurf, [
                 self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
