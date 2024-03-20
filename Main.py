@@ -1,6 +1,6 @@
 import pygame
 # import pygame_gui
-# from main.Buttons_bar.Close_button import Close_button
+from main.Buttons_bar.Close_button import Close_button
 
 pygame.init()
 
@@ -43,7 +43,7 @@ while run_Key:
     pygame.draw.circle(main_background, (0, 0, 255), (800, 480), 75)
 
     "Close button"
-    # Close_button(window, font, 'close').process()
+    Close_button(window, font, 'close').process()
 
     "refresh page"
     pygame.display.flip()
