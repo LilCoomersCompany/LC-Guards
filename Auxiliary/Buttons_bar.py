@@ -73,7 +73,7 @@ class Buttons_bar:
                     self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['special_hover'])
                 else:
                     self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['hover'])
-                if pygame.mouse.get_pressed(num_buttons=3)[0]:
+                if pygame.mouse.get_pressed()[0]:
                     if button['name'] == "Close":
                         self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['special_pressed'])
                         pygame.quit()
