@@ -76,13 +76,12 @@ class Buttons_bar:
                 if pygame.mouse.get_pressed(num_buttons=3)[0]:
                     if button['name'] == "Close":
                         self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['special_pressed'])
-                    else:
-                        self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['pressed'])
-                    if button['name'] == "Close":
                         pygame.quit()
                     elif button['name'] == "Minimize":
+                        self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['pressed'])
                         pygame.display.iconify()
                     elif button['name'] == "FullScreen":
+                        self.buttonSurfaces[self.buttons.index(button)].fill(self.fillColors['pressed'])
                         pygame.display.toggle_fullscreen()
 
                 self.buttonSurfaces[self.buttons.index(button)].blit(self.buttonSurfs[self.buttons.index(button)], [
