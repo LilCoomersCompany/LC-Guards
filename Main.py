@@ -1,4 +1,5 @@
 import pygame
+import moviepy.editor
 from main.Auxiliary.Buttons_bar import Buttons_bar
 
 pygame.init()
@@ -15,12 +16,25 @@ bar_background = pygame.Surface((1600, 40))
 
 "images"
 image = pygame.image.load('F:/Mohammad/Anime-images/desktop-wallpaper-cute-scary-anime-horror-anime-pfp.jpg')
+preview = moviepy.editor.VideoFileClip("../Data/Preview.mp4")
+
+"preview video settings"
+video_frames = []
+current_frame = 0
+for frame in preview.iter_frames():
+    video_frames.append(pygame.image.frombuffer(frame, preview.size, "RGB"))
+"extract audio file"
+# preview_audio = preview.audio
+# preview_audio.write_audiofile("output_audio.mp3")
+pygame.mixer.music.load("../Data/output_audio.mp3")
+pygame.mixer.music.play()
 
 "fonts"
 font = pygame.font.SysFont('Arial', 10)
 
 "Loop"
 run_Key = True
+preview_key = True
 while run_Key:
 
     "default color"
@@ -30,21 +44,23 @@ while run_Key:
     "background"
     window.blit(main_background, (0, 40))
     window.blit(bar_background, (0, 0))
+    main_background.blit(video_frames[current_frame], (0, 0))
 
     "Events"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_Key = False
 
-    pygame.draw.circle(main_background, (0, 0, 255), (800, 480), 75)
-
     "bar buttons"
     Buttons_bar(window, font).process()
 
     "refresh page"
     pygame.display.flip()
+    current_frame += 1
+    if current_frame >= len(video_frames):
+        preview_key = False
     # pygame.display.update()
-    pygame.time.Clock().tick(60)
+    pygame.time.Clock().tick(35)
 
 "End"
 pygame.quit()
