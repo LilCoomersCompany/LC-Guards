@@ -1,6 +1,7 @@
 import pygame
 import moviepy.editor
 from main.Auxiliary.Buttons_bar import run_button_bar
+# from main.Auxiliary.Preview import Preview
 
 pygame.init()
 
@@ -20,10 +21,8 @@ preview = moviepy.editor.VideoFileClip("../Data/Preview.mp4")
 
 "preview video settings"
 video_frames = []
-current_frame = 0
 for frame in preview.iter_frames():
     video_frames.append(pygame.image.frombuffer(frame, preview.size, "RGB"))
-
 
 "extract audio file"
 # preview_audio = preview.audio
@@ -35,19 +34,19 @@ pygame.mixer.music.play()
 font = pygame.font.SysFont('Arial', 10)
 
 "Loop"
+current_frame = 0
 run_Key = True
-preview_key = True
 buttons_bar_key = False
+
 while run_Key:
 
     "default color"
     window.fill((155, 155, 155))
-    bar_background.fill((200, 200, 200))
+    bar_background.fill((64, 64, 64))
 
     "background"
     window.blit(main_background, (0, 40))
     window.blit(bar_background, (0, 0))
-    main_background.blit(video_frames[current_frame], (0, 0))
 
     "Events"
     for event in pygame.event.get():
@@ -57,11 +56,18 @@ while run_Key:
     "bar buttons"
     buttons_bar_key = run_button_bar(window, font, buttons_bar_key)
 
+    "preview"
+    if current_frame < len(video_frames)-12:
+        main_background.blit(video_frames[current_frame], (0, 0))
+        current_frame += 1
+        if current_frame == len(video_frames) - 12:
+            pygame.mixer.music.stop()
+    if current_frame == len(video_frames)-12:
+        main_background.blit(image, (0, 0))
+    # Preview(current_frame, main_background, image).run()
+
     "refresh page"
     pygame.display.flip()
-    current_frame += 1
-    if current_frame >= len(video_frames):
-        preview_key = False
     # pygame.display.update()
     pygame.time.Clock().tick(35)
 

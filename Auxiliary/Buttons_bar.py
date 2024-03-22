@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
     while True:
         screen.fill((140, 45, 40))
-        bar_background.fill((200, 200, 200))
+        bar_background.fill((64, 64, 64))
         screen.blit(bar_background, (0, 0))
         main_background.fill((0, 0, 0))
         screen.blit(main_background, (0, 40))
