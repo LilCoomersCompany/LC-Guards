@@ -1,6 +1,8 @@
 import pygame
 import moviepy.editor
-from main.Auxiliary.Buttons_bar import Buttons_bar
+from main.Auxiliary.Buttons_bar import run_button_bar
+# from main.test import run_button_bar
+
 
 pygame.init()
 
@@ -35,6 +37,7 @@ font = pygame.font.SysFont('Arial', 10)
 "Loop"
 run_Key = True
 preview_key = True
+pm = False
 while run_Key:
 
     "default color"
@@ -50,9 +53,8 @@ while run_Key:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_Key = False
-
     "bar buttons"
-    Buttons_bar(window, font).process()
+    pm = run_button_bar(window, font, main_background, bar_background, pm)
 
     "refresh page"
     pygame.display.flip()
