@@ -1,6 +1,7 @@
 import pygame
 import moviepy.editor
 from main.Auxiliary.Buttons_bar import run_button_bar
+
 # from main.Auxiliary.Preview import Preview
 
 pygame.init()
@@ -14,6 +15,7 @@ pygame.init()
 window = pygame.display.set_mode((1600, 1000), pygame.NOFRAME)
 main_background = pygame.Surface((1600, 960))
 bar_background = pygame.Surface((1600, 40))
+clear_background = pygame.Surface((1600, 960))
 
 "images"
 image = pygame.image.load('F:/Mohammad/Anime-images/desktop-wallpaper-cute-scary-anime-horror-anime-pfp.jpg')
@@ -43,6 +45,7 @@ while run_Key:
     "default color"
     window.fill((155, 155, 155))
     bar_background.fill((64, 64, 64))
+    clear_background.fill((0, 0, 0))
 
     "background"
     window.blit(main_background, (0, 40))
@@ -57,13 +60,14 @@ while run_Key:
     buttons_bar_key = run_button_bar(window, font, buttons_bar_key)
 
     "preview"
-    if current_frame < len(video_frames)-12:
+    if current_frame < len(video_frames) - 12:
         main_background.blit(video_frames[current_frame], (0, 0))
         current_frame += 1
         if current_frame == len(video_frames) - 12:
             pygame.mixer.music.stop()
-    if current_frame == len(video_frames)-12:
-        main_background.blit(image, (0, 0))
+
+    if current_frame == len(video_frames) - 12:
+        window.blit(clear_background, (0, 40))
     # Preview(current_frame, main_background, image).run()
 
     "refresh page"
