@@ -1,8 +1,6 @@
 import pygame
 import moviepy.editor
 from main.Auxiliary.Buttons_bar import run_button_bar
-# from main.test import run_button_bar
-
 
 pygame.init()
 
@@ -25,6 +23,8 @@ video_frames = []
 current_frame = 0
 for frame in preview.iter_frames():
     video_frames.append(pygame.image.frombuffer(frame, preview.size, "RGB"))
+
+
 "extract audio file"
 # preview_audio = preview.audio
 # preview_audio.write_audiofile("output_audio.mp3")
@@ -37,7 +37,7 @@ font = pygame.font.SysFont('Arial', 10)
 "Loop"
 run_Key = True
 preview_key = True
-pm = False
+buttons_bar_key = False
 while run_Key:
 
     "default color"
@@ -53,8 +53,9 @@ while run_Key:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_Key = False
+
     "bar buttons"
-    pm = run_button_bar(window, font, main_background, bar_background, pm)
+    buttons_bar_key = run_button_bar(window, font, buttons_bar_key)
 
     "refresh page"
     pygame.display.flip()
