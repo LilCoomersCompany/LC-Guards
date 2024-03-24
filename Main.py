@@ -45,7 +45,6 @@ while run_Key:
     "default color"
     window.fill((155, 155, 155))
     bar_background.fill((64, 64, 64))
-    clear_background.fill((0, 0, 0))
 
     "background"
     window.blit(main_background, (0, 40))
