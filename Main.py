@@ -67,7 +67,8 @@ while K.MAIN_LOOP:
                 NF.user_text = NF.user_text[:-1]
 
             elif event.key == pygame.K_KP_ENTER:
-                x = True
+                if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+                    x = True
             else:
                 NF.user_text += event.unicode
 
