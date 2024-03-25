@@ -70,18 +70,17 @@ while K.MAIN_LOOP:
             else:
                 NF.user_text += event.unicode
 
-    if x:
-        background_maker()
-        print("5")
-        x = False
-
     "bar buttons"
     K.BUTTON_BAR = run_button_bar(window, font, K.BUTTON_BAR)
 
     if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         text_surface = NF.base_font.render(NF.user_text, True, (255, 255, 255))
-        pygame.draw.rect(window, NF.color, NF.input_rect)
-        window.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
+        pygame.draw.rect(main_background, NF.color, NF.input_rect)
+        main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
+        if x:
+            background_maker()
+            print("5")
+            x = False
 
     "preview"
     if K.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
