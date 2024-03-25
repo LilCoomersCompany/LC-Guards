@@ -3,12 +3,12 @@ import sys
 
 
 def run_button_bar(Screen, Font, Previous_mouse):
-    Width = 40
-    Height = 40
+    Width = 60
+    Height = 60
     buttons = [
-        {'name': "Close", 'location': 1560},
-        {'name': "FullScreen", 'location': 1520},
-        {'name': "Minimize", 'location': 1480}
+        {'name': "Close", 'location': 1540},
+        {'name': "FullScreen", 'location': 1480},
+        {'name': "Minimize", 'location': 1420}
     ]
     buttonRects = []
     buttonSurfs = []
@@ -81,8 +81,8 @@ if __name__ == "__main__":
 
     width, height = 1600, 1000
     screen = pygame.display.set_mode((width, height), pygame.NOFRAME)
-    main_background = pygame.Surface((1600, 960))
-    bar_background = pygame.Surface((1600, 40))
+    main_background = pygame.Surface((1600, 940))
+    bar_background = pygame.Surface((1600, 60))
     font = pygame.font.SysFont('Arial', 10)
 
     previous_mouse = False

@@ -11,14 +11,14 @@ pygame.init()
 
 "Screens"
 window = pygame.display.set_mode((1600, 1000), pygame.NOFRAME)
-main_background = pygame.Surface((1600, 960))
-bar_background = pygame.Surface((1600, 40))
-clear_background = pygame.Surface((1600, 960))
+main_background = pygame.Surface((1600, 940))
+bar_background = pygame.Surface((1600, 60))
+clear_background = pygame.Surface((1600, 940))
 
 
 def background_maker():
-    background = pygame.Surface((1600, 960))
-    window.blit(background, (0, 40))
+    background = pygame.Surface((1600, 940))
+    window.blit(background, (0, 60))
     return background
 
 
@@ -53,7 +53,7 @@ while run_Key:
     bar_background.fill((64, 64, 64))
 
     "background"
-    window.blit(main_background, (0, 40))
+    window.blit(main_background, (0, 60))
     window.blit(bar_background, (0, 0))
 
     "Events"
