@@ -4,7 +4,16 @@ import main.Parameters.Constants as C
 import main.Parameters.keys as K
 import main.Auxiliary.Naming_field as NF
 from main.Auxiliary.Buttons_bar import run_button_bar
+import mysql.connector
 
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Ms@24663938",
+    database="mua"
+)
+myCursor = mydb.cursor()
+sql = "INSERT INTO names (name) VALUES (%s)"
 
 pygame.init()
 
@@ -82,6 +91,10 @@ while K.MAIN_LOOP:
             pygame.draw.rect(main_background, NF.color, NF.input_rect)
             main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
             if x:
+
+                myCursor.execute(sql, (NF.user_text,))
+                mydb.commit()
+                print(myCursor.rowcount, "record inserted.")
                 background_maker()
                 print("5")
                 x = False
