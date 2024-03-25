@@ -1,6 +1,6 @@
 import pygame
 import sys
-import main.Auxiliary.Constants as C
+import main.Parameters.Constants as C
 
 
 def run_button_bar(Screen, Font, Previous_mouse):

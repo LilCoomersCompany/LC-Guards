@@ -1,14 +1,11 @@
 import pygame
 import moviepy.editor
+import main.Parameters.Constants as C
+import main.Parameters.keys as K
 from main.Auxiliary.Buttons_bar import run_button_bar
-import main.Auxiliary.Constants as C
+import main.Auxiliary.Naming_field as NF
 
 pygame.init()
-
-"Default bar"
-# pygame.display.set_caption("LC Guards")
-# pygame.display.set_icon(pygame.image.load('../Photos/Github-icon.jpg'))
-
 
 "Screens"
 window = pygame.display.set_mode((C.WINDOW_WIDTH, C.WINDOW_HEIGHT), pygame.NOFRAME)
@@ -19,7 +16,7 @@ clear_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE)
 
 def background_maker():
     background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
-    window.blit(background, (0, C.BAR_SIZE))
+    main_background.blit(background, (0, 0))
     return background
 
 
@@ -42,12 +39,8 @@ pygame.mixer.music.play()
 font = pygame.font.SysFont(C.FONT_NAME, C.FONT_SIZE)
 
 "Loop"
-current_frame = 0
-run_Key = True
-preview_key = True
-buttons_bar_key = False
-
-while run_Key:
+x = False
+while K.MAIN_LOOP:
 
     "default color"
     window.fill(C.WINDOW_COLOR)
@@ -61,19 +54,44 @@ while run_Key:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run_Key = False
+            "Naming_field"
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if NF.input_rect.collidepoint(event.pos):
+                NF.active = True
+            else:
+                NF.active = False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:
+                NF.user_text = NF.user_text[:-1]
+
+            elif event.key == pygame.K_KP_ENTER:
+                x = True
+            else:
+                NF.user_text += event.unicode
+
+    if x:
+        background_maker()
+        print("5")
+        x = False
 
     "bar buttons"
-    buttons_bar_key = run_button_bar(window, font, buttons_bar_key)
+    K.BUTTON_BAR = run_button_bar(window, font, K.BUTTON_BAR)
+
+    if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+        text_surface = NF.base_font.render(NF.user_text, True, (255, 255, 255))
+        pygame.draw.rect(window, NF.color, NF.input_rect)
+        window.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
 
     "preview"
-    if current_frame < len(video_frames) - 12:
-        main_background.blit(video_frames[current_frame], (0, 0))
-        current_frame += 1
-        if current_frame == len(video_frames) - 12:
+    if K.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
+        main_background.blit(video_frames[K.CURRENT_FRAME_PREVIEW], (0, 0))
+        K.CURRENT_FRAME_PREVIEW += 1
+        if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
             pygame.mixer.music.stop()
 
-    if current_frame == len(video_frames) - 12:
-        background_maker()
+    # if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+    #     background_maker()
 
     "refresh page"
     pygame.display.flip()
