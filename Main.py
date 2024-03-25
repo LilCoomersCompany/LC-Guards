@@ -40,6 +40,7 @@ font = pygame.font.SysFont(C.FONT_NAME, C.FONT_SIZE)
 
 "Loop"
 x = False
+t = True
 while K.MAIN_LOOP:
 
     "default color"
@@ -74,13 +75,15 @@ while K.MAIN_LOOP:
     K.BUTTON_BAR = run_button_bar(window, font, K.BUTTON_BAR)
 
     if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
-        text_surface = NF.base_font.render(NF.user_text, True, (255, 255, 255))
-        pygame.draw.rect(main_background, NF.color, NF.input_rect)
-        main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
-        if x:
-            background_maker()
-            print("5")
-            x = False
+        if t:
+            text_surface = NF.base_font.render(NF.user_text, True, (255, 255, 255))
+            pygame.draw.rect(main_background, NF.color, NF.input_rect)
+            main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
+            if x:
+                background_maker()
+                print("5")
+                x = False
+                t = False
 
     "preview"
     if K.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
