@@ -1,6 +1,7 @@
 import pygame
 import moviepy.editor
 from main.Auxiliary.Buttons_bar import run_button_bar
+import main.Auxiliary.Constants as C
 
 pygame.init()
 
@@ -10,15 +11,15 @@ pygame.init()
 
 
 "Screens"
-window = pygame.display.set_mode((1600, 1000), pygame.NOFRAME)
-main_background = pygame.Surface((1600, 940))
-bar_background = pygame.Surface((1600, 60))
-clear_background = pygame.Surface((1600, 940))
+window = pygame.display.set_mode((C.WINDOW_WIDTH, C.WINDOW_HEIGHT), pygame.NOFRAME)
+main_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
+bar_background = pygame.Surface((C.WINDOW_WIDTH, C.BAR_SIZE))
+clear_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
 
 
 def background_maker():
-    background = pygame.Surface((1600, 940))
-    window.blit(background, (0, 60))
+    background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
+    window.blit(background, (0, C.BAR_SIZE))
     return background
 
 
@@ -38,7 +39,7 @@ pygame.mixer.music.load("../Data/Preview_audio.mp3")
 pygame.mixer.music.play()
 
 "fonts"
-font = pygame.font.SysFont('Arial', 10)
+font = pygame.font.SysFont(C.FONT_NAME, C.FONT_SIZE)
 
 "Loop"
 current_frame = 0
@@ -49,11 +50,11 @@ buttons_bar_key = False
 while run_Key:
 
     "default color"
-    window.fill((155, 155, 155))
-    bar_background.fill((64, 64, 64))
+    window.fill(C.WINDOW_COLOR)
+    bar_background.fill(C.BAR_COLOR)
 
     "background"
-    window.blit(main_background, (0, 60))
+    window.blit(main_background, (0, C.BAR_SIZE))
     window.blit(bar_background, (0, 0))
 
     "Events"
@@ -77,7 +78,7 @@ while run_Key:
     "refresh page"
     pygame.display.flip()
     # pygame.display.update()
-    pygame.time.Clock().tick(35)
+    pygame.time.Clock().tick(C.FPS)
 
 "End"
 pygame.quit()
