@@ -2,8 +2,9 @@ import pygame
 import moviepy.editor
 import main.Parameters.Constants as C
 import main.Parameters.keys as K
-from main.Auxiliary.Buttons_bar import run_button_bar
 import main.Auxiliary.Naming_field as NF
+from main.Auxiliary.Buttons_bar import run_button_bar
+
 
 pygame.init()
 
