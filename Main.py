@@ -1,8 +1,7 @@
 import pygame
 import moviepy.editor
 import mysql.connector
-import main.Parameters.Constants as c
-import main.Parameters.keys as k
+import main.Constants as c
 import main.Fields.Naming_field as naming
 from main.Fields.Buttons_bar import run_button_bar
 
@@ -52,7 +51,7 @@ font = pygame.font.SysFont(c.FONT_NAME, c.FONT_SIZE)
 "Loop"
 x = False
 t = True
-while k.MAIN_LOOP:
+while c.MAIN_LOOP:
 
     "default color"
     window.fill(c.WINDOW_COLOR)
@@ -78,15 +77,15 @@ while k.MAIN_LOOP:
                 naming.user_text = naming.user_text[:-1]
 
             elif event.key == pygame.K_KP_ENTER:
-                if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+                if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
                     x = True
             else:
                 naming.user_text += event.unicode
 
     "bar buttons"
-    k.BUTTON_BAR = run_button_bar(window, font, k.BUTTON_BAR)
+    c.BUTTON_BAR = run_button_bar(window, font, c.BUTTON_BAR)
 
-    if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+    if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         if t:
             text_surface = naming.base_font.render(naming.user_text, True, (255, 255, 255))
             pygame.draw.rect(main_background, naming.color, naming.input_rect)
@@ -102,10 +101,10 @@ while k.MAIN_LOOP:
                 t = False
 
     "preview"
-    if k.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
-        main_background.blit(video_frames[k.CURRENT_FRAME_PREVIEW], (0, 0))
-        k.CURRENT_FRAME_PREVIEW += 1
-        if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+    if c.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
+        main_background.blit(video_frames[c.CURRENT_FRAME_PREVIEW], (0, 0))
+        c.CURRENT_FRAME_PREVIEW += 1
+        if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
             pygame.mixer.music.stop()
 
     "refresh page"
