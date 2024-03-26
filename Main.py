@@ -2,8 +2,8 @@ import pygame
 import moviepy.editor
 import main.Parameters.Constants as C
 import main.Parameters.keys as K
-import main.Auxiliary.Naming_field as NF
-from main.Auxiliary.Buttons_bar import run_button_bar
+import main.Fields.Naming_field as NF
+from main.Fields.Buttons_bar import run_button_bar
 import mysql.connector
 
 mydb = mysql.connector.connect(
