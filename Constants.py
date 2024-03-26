@@ -9,9 +9,9 @@ FPS = 35
 FONT_NAME = 'Arial'
 
 "Keys"
-MAIN_LOOP = True
-PREVIEW = True
-BUTTON_BAR = False
+MAIN_LOOP_KEY = True
+PREVIEW_KEY = True
+BUTTON_BAR_KEY = False
 
 "Screen colors"
 WINDOW_COLOR = (155, 155, 155)

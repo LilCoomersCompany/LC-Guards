@@ -55,7 +55,7 @@ font = pygame.font.SysFont(c.FONT_NAME, c.FONT_SIZE)
 "Loop"
 x = False
 t = True
-while c.MAIN_LOOP:
+while c.MAIN_LOOP_KEY:
 
     "default color"
     window.fill(c.WINDOW_COLOR)
@@ -68,7 +68,8 @@ while c.MAIN_LOOP:
     "Events"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            run_Key = False
+            c.MAIN_LOOP_KEY = False
+
             "Naming_field"
         if event.type == pygame.MOUSEBUTTONDOWN:
             if naming.input_rect.collidepoint(event.pos):
@@ -87,7 +88,7 @@ while c.MAIN_LOOP:
                 naming.user_text += event.unicode
 
     "bar buttons"
-    c.BUTTON_BAR = run_button_bar(window, font, c.BUTTON_BAR)
+    c.BUTTON_BAR_KEY = run_button_bar(window, font, c.BUTTON_BAR_KEY)
 
     if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         if t:
