@@ -1,10 +1,11 @@
 import pygame
 import moviepy.editor
-import main.Parameters.Constants as C
-import main.Parameters.keys as K
-import main.Fields.Naming_field as NF
-from main.Fields.Buttons_bar import run_button_bar
 import mysql.connector
+import main.Parameters.Constants as c
+import main.Parameters.keys as k
+import main.Fields.Naming_field as naming
+from main.Fields.Buttons_bar import run_button_bar
+
 
 mydb = mysql.connector.connect(
     host="localhost",
@@ -18,14 +19,14 @@ sql = "INSERT INTO names (name) VALUES (%s)"
 pygame.init()
 
 "Screens"
-window = pygame.display.set_mode((C.WINDOW_WIDTH, C.WINDOW_HEIGHT), pygame.NOFRAME)
-main_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
-bar_background = pygame.Surface((C.WINDOW_WIDTH, C.BAR_SIZE))
-clear_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
+window = pygame.display.set_mode((c.WINDOW_WIDTH, c.WINDOW_HEIGHT), pygame.NOFRAME)
+main_background = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT - c.BAR_SIZE))
+bar_background = pygame.Surface((c.WINDOW_WIDTH, c.BAR_SIZE))
+clear_background = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT - c.BAR_SIZE))
 
 
 def background_maker():
-    background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
+    background = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT - c.BAR_SIZE))
     main_background.blit(background, (0, 0))
     return background
 
@@ -46,19 +47,19 @@ pygame.mixer.music.load("../Data/Preview_audio.mp3")
 pygame.mixer.music.play()
 
 "fonts"
-font = pygame.font.SysFont(C.FONT_NAME, C.FONT_SIZE)
+font = pygame.font.SysFont(c.FONT_NAME, c.FONT_SIZE)
 
 "Loop"
 x = False
 t = True
-while K.MAIN_LOOP:
+while k.MAIN_LOOP:
 
     "default color"
-    window.fill(C.WINDOW_COLOR)
-    bar_background.fill(C.BAR_COLOR)
+    window.fill(c.WINDOW_COLOR)
+    bar_background.fill(c.BAR_COLOR)
 
     "background"
-    window.blit(main_background, (0, C.BAR_SIZE))
+    window.blit(main_background, (0, c.BAR_SIZE))
     window.blit(bar_background, (0, 0))
 
     "Events"
@@ -67,53 +68,50 @@ while K.MAIN_LOOP:
             run_Key = False
             "Naming_field"
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if NF.input_rect.collidepoint(event.pos):
-                NF.active = True
+            if naming.input_rect.collidepoint(event.pos):
+                naming.active = True
             else:
-                NF.active = False
+                naming.active = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
-                NF.user_text = NF.user_text[:-1]
+                naming.user_text = naming.user_text[:-1]
 
             elif event.key == pygame.K_KP_ENTER:
-                if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+                if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
                     x = True
             else:
-                NF.user_text += event.unicode
+                naming.user_text += event.unicode
 
     "bar buttons"
-    K.BUTTON_BAR = run_button_bar(window, font, K.BUTTON_BAR)
+    k.BUTTON_BAR = run_button_bar(window, font, k.BUTTON_BAR)
 
-    if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+    if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         if t:
-            text_surface = NF.base_font.render(NF.user_text, True, (255, 255, 255))
-            pygame.draw.rect(main_background, NF.color, NF.input_rect)
-            main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
+            text_surface = naming.base_font.render(naming.user_text, True, (255, 255, 255))
+            pygame.draw.rect(main_background, naming.color, naming.input_rect)
+            main_background.blit(text_surface, (naming.input_rect.x + 5, naming.input_rect.y + 5))
             if x:
-                myCursor.execute(sql, (NF.user_text,))
+                myCursor.execute(sql, (naming.user_text,))
                 mydb.commit()
                 print(myCursor.rowcount, "record inserted.")
                 P = background_maker()
-                P_text = NF.base_font.render('Welcome to LC Guards ' + NF.user_text, True, (255, 255, 255))
+                P_text = naming.base_font.render('Welcome to LC Guards ' + naming.user_text, True, (255, 255, 255))
                 main_background.blit(P_text, (650, 470))
                 x = False
                 t = False
 
     "preview"
-    if K.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
-        main_background.blit(video_frames[K.CURRENT_FRAME_PREVIEW], (0, 0))
-        K.CURRENT_FRAME_PREVIEW += 1
-        if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
+    if k.CURRENT_FRAME_PREVIEW < len(video_frames) - 12:
+        main_background.blit(video_frames[k.CURRENT_FRAME_PREVIEW], (0, 0))
+        k.CURRENT_FRAME_PREVIEW += 1
+        if k.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
             pygame.mixer.music.stop()
-
-    # if K.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
-    #     background_maker()
 
     "refresh page"
     pygame.display.flip()
     # pygame.display.update()
-    pygame.time.Clock().tick(C.FPS)
+    pygame.time.Clock().tick(c.FPS)
 
 "End"
 pygame.quit()
