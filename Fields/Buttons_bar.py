@@ -41,7 +41,7 @@ def run_button_bar(Screen, Font, Previous_mouse):
     for button in buttons:
         if buttonRects[buttons.index(button)].collidepoint(mousePos):
             if button['name'] == "Close":
-                buttonSurfaces[buttons.index(button)].fill(C.SHBBC)
+                buttonSurfaces[buttons.index(button)].fill(C.SPECIAL_HOVER_BAR_BUTTONS_COLOR)
                 if Previous_mouse:
                     buttonSurfaces[buttons.index(button)].fill(C.SPECIAL_PRESSED_BAR_BUTTONS_COLOR)
                     if not current_mouse:
@@ -50,11 +50,11 @@ def run_button_bar(Screen, Font, Previous_mouse):
                 buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_HOVER_BAR_BUTTONS_COLOR)
                 if Previous_mouse:
                     if button['name'] == "Minimize":
-                        buttonSurfaces[buttons.index(button)].fill(C.DPBBC)
+                        buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
                         if not current_mouse:
                             pygame.display.iconify()
                     elif button['name'] == "FullScreen":
-                        buttonSurfaces[buttons.index(button)].fill(C.DPBBC)
+                        buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
                         if not current_mouse:
                             pygame.display.toggle_fullscreen()
 
