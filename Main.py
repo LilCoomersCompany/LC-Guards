@@ -91,12 +91,12 @@ while K.MAIN_LOOP:
             pygame.draw.rect(main_background, NF.color, NF.input_rect)
             main_background.blit(text_surface, (NF.input_rect.x + 5, NF.input_rect.y + 5))
             if x:
-
                 myCursor.execute(sql, (NF.user_text,))
                 mydb.commit()
                 print(myCursor.rowcount, "record inserted.")
-                background_maker()
-                print("5")
+                P = background_maker()
+                P_text = NF.base_font.render('Welcome to LC Guards ' + NF.user_text, True, (255, 255, 255))
+                main_background.blit(P_text, (650, 470))
                 x = False
                 t = False
 
