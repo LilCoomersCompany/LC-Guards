@@ -43,11 +43,11 @@ def run_button_bar(Screen, Font, Previous_mouse):
             if button['name'] == "Close":
                 buttonSurfaces[buttons.index(button)].fill(C.SHBBC)
                 if Previous_mouse:
-                    buttonSurfaces[buttons.index(button)].fill(C.SPBBC)
+                    buttonSurfaces[buttons.index(button)].fill(C.SPECIAL_PRESSED_BAR_BUTTONS_COLOR)
                     if not current_mouse:
                         pygame.quit()
             elif button['name'] == "Minimize" or button['name'] == "FullScreen":
-                buttonSurfaces[buttons.index(button)].fill(C.DHBBC)
+                buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_HOVER_BAR_BUTTONS_COLOR)
                 if Previous_mouse:
                     if button['name'] == "Minimize":
                         buttonSurfaces[buttons.index(button)].fill(C.DPBBC)

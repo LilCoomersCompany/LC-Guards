@@ -1,4 +1,5 @@
 """"""
+"imports"
 import pygame
 import moviepy.editor
 import mysql.connector
@@ -6,7 +7,10 @@ import main.Constants as c
 import main.Fields.Naming_field as naming
 from main.Fields.Buttons_bar import run_button_bar
 
+pygame.init()
 
+
+"SQL"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -16,7 +20,6 @@ mydb = mysql.connector.connect(
 myCursor = mydb.cursor()
 sql = "INSERT INTO names (name) VALUES (%s)"
 
-pygame.init()
 
 "Screens"
 window = pygame.display.set_mode((c.WINDOW_WIDTH, c.WINDOW_HEIGHT), pygame.NOFRAME)
