@@ -18,7 +18,7 @@ mydb = mysql.connector.connect(
     database="mua"
 )
 myCursor = mydb.cursor()
-sql = "INSERT INTO names (name) VALUES (%s)"
+sql = "INSERT INTO users (name) VALUES (%s)"
 
 
 "Screens"
