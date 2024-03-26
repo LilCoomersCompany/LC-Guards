@@ -1,16 +1,15 @@
 """"""
 import pygame
 import sys
-import main.Constants as C
+import main.Constants as c
 
 
 def run_button_bar(Screen, Font, Previous_mouse):
-    Width = C.BAR_SIZE
-    Height = C.BAR_SIZE
+
     buttons = [
-        {'name': "Close", 'location': C.WINDOW_WIDTH - C.BAR_SIZE},
-        {'name': "FullScreen", 'location':  C.WINDOW_WIDTH - 2 * C.BAR_SIZE},
-        {'name': "Minimize", 'location':  C.WINDOW_WIDTH - 3 * C.BAR_SIZE}
+        {'name': "Close", 'location': c.WINDOW_WIDTH - c.BAR_SIZE},
+        {'name': "FullScreen", 'location': c.WINDOW_WIDTH - 2 * c.BAR_SIZE},
+        {'name': "Minimize", 'location': c.WINDOW_WIDTH - 3 * c.BAR_SIZE}
     ]
     buttonRects = []
     buttonSurfs = []
@@ -19,10 +18,10 @@ def run_button_bar(Screen, Font, Previous_mouse):
     current_mouse = pygame.mouse.get_pressed()[0]
 
     for button in buttons:
-        buttonSurface = pygame.Surface((Width, Height))
-        buttonRect = pygame.Rect(button['location'], 0, Width, Height)
-        buttonSurf = Font.render(button['name'], True, (255, 255, 255))
-        buttonSurface.fill(C.BAR_COLOR)
+        buttonSurface = pygame.Surface((c.BAR_SIZE, c.BAR_SIZE))
+        buttonRect = pygame.Rect(button['location'], 0, c.BAR_SIZE, c.BAR_SIZE)
+        buttonSurf = Font.render(button['name'], True, c.FONT_COLOR)
+        buttonSurface.fill(c.BAR_COLOR)
         buttonRects.append(buttonRect)
         buttonSurfs.append(buttonSurf)
         buttonSurfaces.append(buttonSurface)
@@ -41,20 +40,20 @@ def run_button_bar(Screen, Font, Previous_mouse):
     for button in buttons:
         if buttonRects[buttons.index(button)].collidepoint(mousePos):
             if button['name'] == "Close":
-                buttonSurfaces[buttons.index(button)].fill(C.SPECIAL_HOVER_BAR_BUTTONS_COLOR)
+                buttonSurfaces[buttons.index(button)].fill(c.SPECIAL_HOVER_BAR_BUTTONS_COLOR)
                 if Previous_mouse:
-                    buttonSurfaces[buttons.index(button)].fill(C.SPECIAL_PRESSED_BAR_BUTTONS_COLOR)
+                    buttonSurfaces[buttons.index(button)].fill(c.SPECIAL_PRESSED_BAR_BUTTONS_COLOR)
                     if not current_mouse:
                         pygame.quit()
             elif button['name'] == "Minimize" or button['name'] == "FullScreen":
-                buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_HOVER_BAR_BUTTONS_COLOR)
+                buttonSurfaces[buttons.index(button)].fill(c.DEFAULT_HOVER_BAR_BUTTONS_COLOR)
                 if Previous_mouse:
                     if button['name'] == "Minimize":
-                        buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
+                        buttonSurfaces[buttons.index(button)].fill(c.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
                         if not current_mouse:
                             pygame.display.iconify()
                     elif button['name'] == "FullScreen":
-                        buttonSurfaces[buttons.index(button)].fill(C.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
+                        buttonSurfaces[buttons.index(button)].fill(c.DEFAULT_PRESSED_BAR_BUTTONS_COLOR)
                         if not current_mouse:
                             pygame.display.toggle_fullscreen()
 
@@ -73,20 +72,20 @@ def run_button_bar(Screen, Font, Previous_mouse):
 if __name__ == "__main__":
     pygame.init()
 
-    width, height = C.WINDOW_WIDTH, C.WINDOW_HEIGHT
+    width, height = c.WINDOW_WIDTH, c.WINDOW_HEIGHT
     screen = pygame.display.set_mode((width, height), pygame.NOFRAME)
-    main_background = pygame.Surface((C.WINDOW_WIDTH, C.WINDOW_HEIGHT - C.BAR_SIZE))
-    bar_background = pygame.Surface((C.WINDOW_WIDTH, C.BAR_SIZE))
-    font = pygame.font.SysFont(C.FONT_NAME, C.FONT_SIZE)
+    main_background = pygame.Surface((c.WINDOW_WIDTH, c.WINDOW_HEIGHT - c.BAR_SIZE))
+    bar_background = pygame.Surface((c.WINDOW_WIDTH, c.BAR_SIZE))
+    font = pygame.font.SysFont(c.FONT_NAME, c.FONT_SIZE)
 
     previous_mouse = False
 
     while True:
-        screen.fill(C.WINDOW_COLOR)
-        bar_background.fill(C.BAR_COLOR)
+        screen.fill(c.WINDOW_COLOR)
+        bar_background.fill(c.BAR_COLOR)
         screen.blit(bar_background, (0, 0))
         main_background.fill((0, 0, 0))
-        screen.blit(main_background, (0, C.BAR_SIZE))
+        screen.blit(main_background, (0, c.BAR_SIZE))
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

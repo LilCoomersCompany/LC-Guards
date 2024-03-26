@@ -1,7 +1,7 @@
 """"""
 import pygame
 
-base_font = pygame.font.Font(None, 32)
+base_font = pygame.font.Font('C:/Users/h510/Desktop/LC Guards/Data/Font/Font.otf', 20)
 user_text = ''
 
 

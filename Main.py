@@ -92,7 +92,7 @@ while c.MAIN_LOOP_KEY:
 
     if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         if t:
-            text_surface = naming.base_font.render(naming.user_text, True, (255, 255, 255))
+            text_surface = naming.base_font.render(naming.user_text, True, c.FONT_COLOR)
             pygame.draw.rect(main_background, naming.color, naming.input_rect)
             main_background.blit(text_surface, (naming.input_rect.x + 5, naming.input_rect.y + 5))
             if x:
@@ -100,7 +100,7 @@ while c.MAIN_LOOP_KEY:
                 mydb.commit()
                 print(myCursor.rowcount, "record inserted.")
                 P = background_maker()
-                P_text = naming.base_font.render('Welcome to LC Guards ' + naming.user_text, True, (255, 255, 255))
+                P_text = naming.base_font.render('Welcome to LC Guards ' + naming.user_text, True, c.FONT_COLOR)
                 main_background.blit(P_text, (650, 470))
                 x = False
                 t = False
