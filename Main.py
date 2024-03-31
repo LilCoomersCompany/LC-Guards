@@ -9,7 +9,6 @@ from main.Fields.Buttons_bar import run_button_bar
 
 pygame.init()
 
-
 "SQL"
 mydb = mysql.connector.connect(
     host="localhost",
@@ -19,7 +18,6 @@ mydb = mysql.connector.connect(
 )
 myCursor = mydb.cursor()
 sql = "INSERT INTO users (name) VALUES (%s)"
-
 
 "Screens"
 window = pygame.display.set_mode((c.WINDOW_WIDTH, c.WINDOW_HEIGHT), pygame.NOFRAME)
@@ -37,11 +35,20 @@ def background_maker():
 "images"
 image = pygame.image.load('F:/Mohammad/Anime-images/desktop-wallpaper-cute-scary-anime-horror-anime-pfp.jpg')
 preview = moviepy.editor.VideoFileClip("../Data/Preview.mp4")
+# preview1 = moviepy.editor.VideoFileClip("../Data/Amir2.mp4")
+icon = pygame.image.load('C:/Users/h510/Desktop/LC Guards/Data/f.2.jpg')
+icon = pygame.transform.scale(icon, (60, 60))
+icon1 = pygame.image.load('C:/Users/h510/Desktop/LC Guards/Data/f.1.jpg')
+icon1 = pygame.transform.scale(icon1, (60, 60))
 
 "preview video settings"
 video_frames = []
 for frame in preview.iter_frames():
     video_frames.append(pygame.image.frombuffer(frame, preview.size, "RGB"))
+
+# video_frames1 = []
+# for frame in preview1.iter_frames():
+#     video_frames1.append(pygame.image.frombuffer(frame, preview1.size, "RGB"))
 
 "extract audio preview file"
 # preview_audio = preview.audio
@@ -64,6 +71,8 @@ while c.MAIN_LOOP_KEY:
     "background"
     window.blit(main_background, (0, c.BAR_SIZE))
     window.blit(bar_background, (0, 0))
+    window.blit(icon, (0, 0))
+    window.blit(icon1, (60, 0))
 
     "Events"
     for event in pygame.event.get():
@@ -88,6 +97,7 @@ while c.MAIN_LOOP_KEY:
                 naming.user_text += event.unicode
 
     "bar buttons"
+    # window.blit(video_frames1[c.CURRENT_FRAME_PREVIEW], (180, 0))
     c.BUTTON_BAR_KEY = run_button_bar(window, font, c.BUTTON_BAR_KEY)
 
     if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
