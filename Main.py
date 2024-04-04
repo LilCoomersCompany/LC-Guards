@@ -35,7 +35,7 @@ def background_maker():
 "images"
 image = pygame.image.load('F:/Mohammad/Anime-images/desktop-wallpaper-cute-scary-anime-horror-anime-pfp.jpg')
 preview = moviepy.editor.VideoFileClip("../Data/Preview.mp4")
-preview1 = moviepy.editor.VideoFileClip("../Data/Amir2.mp4")
+preview1 = moviepy.editor.VideoFileClip("../Data/Comp 1_1.mp4")
 icon = pygame.image.load('C:/Users/h510/Desktop/LC Guards/Data/f.2.jpg')
 icon = pygame.transform.scale(icon, (60, 60))
 icon1 = pygame.image.load('C:/Users/h510/Desktop/LC Guards/Data/f.1.jpg')
