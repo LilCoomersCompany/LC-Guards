@@ -102,7 +102,7 @@ while c.MAIN_LOOP_KEY:
     # if c.CURRENT_FRAME_PREVIEW <= len(video_frames1) - 5:
     #     print(len(video_frames1))
     #     window.blit(video_frames1[c.CURRENT_FRAME_PREVIEW], (100, 0))
-    c.BUTTON_BAR_KEY = run_button_bar(window, font, c.BUTTON_BAR_KEY, icon1, icon, video_frames1, icon2)
+    c.BUTTON_BAR_KEY = run_button_bar(window, font, c.BUTTON_BAR_KEY, video_frames1[0], video_frames1[71], video_frames1, video_frames1[0])
 
     if c.CURRENT_FRAME_PREVIEW == len(video_frames) - 12:
         if t:
